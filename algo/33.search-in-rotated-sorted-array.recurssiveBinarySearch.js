@@ -32,5 +32,44 @@ const search = (nums, target, low = 0, high = nums.length - 1) => {
         }
     }
 };
+
+function search(nums, target) {
+    // Define the recursive search function
+    function searchHelper(low, high) {
+        // Base case: the search range has been exhausted
+        if (low > high) {
+            return -1;
+        }
+
+        // Calculate the middle index of the search range
+        const middle = Math.floor((low + high) / 2);
+
+        // Base case: the middle element is the target
+        if (nums[middle] === target) {
+            return middle;
+        }
+
+        // Determine which side of the array is ordered and search that side
+        if (nums[low] <= nums[middle]) {
+            // Left side is ordered
+            if (target >= nums[low] && target < nums[middle]) {
+                return searchHelper(low, middle - 1);
+            } else {
+                return searchHelper(middle + 1, high);
+            }
+        } else {
+            // Right side is ordered
+            if (target > nums[middle] && target <= nums[high]) {
+                return searchHelper(middle + 1, high);
+            } else {
+                return searchHelper(low, middle - 1);
+            }
+        }
+    }
+
+    // Call the recursive search function with the initial search range
+    return searchHelper(0, nums.length - 1);
+}
+
 // @lc code=end
 
