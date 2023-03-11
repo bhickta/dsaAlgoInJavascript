@@ -13,13 +13,13 @@ function prime1(num) {
     }
 }
 
-function prime2(num) {
+export function prime2(num) {
     if (num < 2) {
         return false
     } else if (num == 2) {
         return true
     } else {
-        for (let i = 2; i < num; i++) {
+        for (let i = 2; i*i <= num; i++) {
             if (num % i == 0) {
                 return false
             }
@@ -27,3 +27,4 @@ function prime2(num) {
         return true
     }
 }
+prime2(15)
